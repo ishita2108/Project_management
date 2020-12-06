@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<hr>
+<table class=" table table-hover">
+    <thead class="bg-success text-white text-center">
+      <tr>
+        <th colspan ="4" mx-center>{{student.student.name}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Enrollment Number</td>
+        <td>-</td>
+        <td>{{student.student.enroll}}</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Branch</td>
+        <td>-</td>
+        <td>{{student.student.branch}}</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Section</td>
+        <td>-</td>
+        <td>{{student.student.section}}</td>
+      </tr>
+      <tr>
+        <th scope="row">4</th>
+        <td>Project</td>
+        <td>-</td>
+        <td>{{student.project.name}}</td>
+      </tr>
+      <tr>
+        <th scope="row">5</th>
+        <td>Language</td>
+        <td>-</td>
+        <td>{{student.project.language}}</td>
+      </tr>
+      <tr>
+        <th scope="row">6</th>
+        <td>Category</td>
+        <td>-</td>
+        <td>{{student.project.category}}</td>
+      </tr>
+      <tr>
+        <th scope="row">7</th>
+        <td>Project Description</td>
+        <td>-</td>
+        <td>{{student.project.description}}</td>
+      </tr>
+      <tr>
+        <th scope="row">8</th>
+        <td>Project Document</td>
+        <td>-</td>
+        <td><a target="_blank " href="{{student.project.document.url}}">Download Document!</a></td>
+      </tr>
+      
+      
+    </tbody>
+  </table>
+
+{% endblock  %}

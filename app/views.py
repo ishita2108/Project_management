@@ -3,9 +3,8 @@ from django.http import HttpResponse
 from .models import Student, Project
 
 # Create your views here.
-def home_view(request):
+def home_view(request, *args, **kwargs):
     students = Student.objects.all()
-    projects = Project.objects.all()
     
     stu = []
     for index, student in enumerate(students):
@@ -16,5 +15,15 @@ def home_view(request):
         stu_dict['project'] = proj
         stu.append(stu_dict)
     print(stu)
-    context = {'students':stu, 'projects':projects}
+    context = {'students':stu}
     return render(request, 'home.html', context)
+
+
+def detail_view(request, id, *args, **kwargs):
+    student = Student.objects.get(id=id)
+    stu_dict = {}
+    stu_dict['student'] = student
+    proj= student.project.all().first()
+    stu_dict['project'] = proj
+    context = {'student':stu_dict}
+    return render(request, 'stu.html', context)

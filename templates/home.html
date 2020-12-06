@@ -3,12 +3,14 @@
 {% block content %}
 <hr>
 <table class="table table-hover">
-    <thead class="thead-dark">
+    <thead class="bg-success text-white">
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Project Name</th>
         <th scope="col">Language</th>
+        <th scope="col">Section</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -18,6 +20,8 @@
         <td>{{student.student.name}}</td>
         <td>{{student.project.name}}</td>
         <td>{{student.project.language}}</td>
+        <td>{{student.student.section}}</td>
+        <td><a class="btn btn-sm btn-info" href="/student/{{student.student.id}}">View</a></td>
       </tr>
       {% endfor %}
     </tbody>
