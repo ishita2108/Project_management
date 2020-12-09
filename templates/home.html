@@ -13,7 +13,7 @@
         <th></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id=table-body>
         {% for student in students %}
       <tr>
         <th scope="row">{{student.index}}</th>
@@ -26,8 +26,71 @@
       {% endfor %}
     </tbody>
   </table>
+ 
+  <div class='row mb-3 mt-3'>
+    <div class='col-md-6 mx-auto col-10  border'>
+        <form class='form' id='stu-create-form' method='POST' action='/create-student'>
+            {% csrf_token %}
+            <div class='d-none alert alert-danger' id='stu-create-form-error'></div>
+            <input type='hidden' value='/' name='next' /> <!-- want it to be redirected to home page-->
+            <input type="text" required="required" class='form-control text' rows='5' name='name' placeholder='Enter Name...'/>
+            <input type="text" required="required" class='form-control text' rows='5' name='enroll' placeholder='Enter Enrollment...'/>
+            <input type="text" required="required" class='form-control text' rows='5' name='branch' placeholder='Enter Branch...'/>
+            <input type="text" required="required" class='form-control text' rows='5' name='section' placeholder='Enter Section...'/>
+           
+            <button type='submit' class="btn btn-info float-right">Submit</button>
+            <div class="msg text-success bg-light"></div>
+        </form>
+    </div> 
+</div>
+
+
+<script>
+  function handleStuCreateFormDidSubmit(event){
+    event.preventDefault()
+    const myForm = event.target
+    const myFormData = new FormData(myForm)
+    const url = myForm.getAttribute("action")
+    const method = myForm.getAttribute("method")
+    const xhr = new XMLHttpRequest()
+    const responseType ="json"
+    xhr.responseType = responseType
+        xhr.open(method,url)
+        xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest") //In order to make django return "true" when queried request.is_ajax()
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
+        xhr.onload = function(){
+        //console.log(xhr.response) log the response thats coming back
+        if(xhr.status === 201) {
+            //handleTweetFormError("Success", false)
+            const newStudentJson = xhr.response //response will give tweet element in json
+            //const newTweetJson = JSON.parse(newTweet)
+            //console.log(newTweetJson.likes)
+            const newStudentElement = formatStudentTableEl(newStudentJson)
+            const ogHtml = tableConEl.innerHTML
+            tableConEl.innerHTML = newStudentElement + ogHtml
+            myForm.reset() // to clear the previous tweet after successfully tweeting
+            console.log(newStudentJson)
+
+        }
+  }
+  xhr.onerror = function(){
+    alert('ERROR!');
+  }
+  xhr.send(myFormData)
+  }
+
+  const formatStudentTableEl = (props) => {
+    const student = props
+    const formattedStu = "<tr><th scope='row'>#</th><td>"+ student.name +"</td><td></td><td></td><td> " + student.section +"</td></tr>"
+    return formattedStu
+  }
+
+  const stuCreateFormEl = document.getElementById('stu-create-form')
+  const tableConEl = document.getElementById('table-body')
+  stuCreateFormEl.addEventListener("submit",handleStuCreateFormDidSubmit)
   
-  
-  </table>
+    
+</script>
+
 
 {% endblock  %}

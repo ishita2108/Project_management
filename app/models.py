@@ -35,6 +35,16 @@ class Student(models.Model):
     class Meta:
         ordering = ['name']
 
+    def serialize(self):
+        return{
+            "id": self.id,
+            "name": self.name,
+            "enroll": self.enroll,
+            "branch": self.branch,
+            "section": self.section,
+            "time": self.date_created
+        }
+
     def __str__(self):
         return self.name
 
