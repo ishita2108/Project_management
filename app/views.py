@@ -27,3 +27,8 @@ def detail_view(request, id, *args, **kwargs):
     stu_dict['project'] = proj
     context = {'student':stu_dict}
     return render(request, 'stu.html', context)
+
+def search_view(request, *args, **kwargs ):
+    students = Student.objects.all() 
+    return render(request, 'filter.html')
+

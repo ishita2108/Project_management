@@ -55,7 +55,7 @@
         <th scope="row">8</th>
         <td>Project Document</td>
         <td>-</td>
-        <td><a target="_blank " href="{{student.project.document.url}}">Download Document!</a></td>
+        <td>{% if student.project.document %}<a target="_blank " href="{{student.project.document.url}}">Download Document!</a>{% endif %}</td>
       </tr>
       
       
