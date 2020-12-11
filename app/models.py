@@ -23,10 +23,20 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+    def serialize(self):
+        return{
+            "id": self.id,
+            "name": self.name,
+            "language": self.language,
+            "category": self.category,
+            "description": self.description,
+            "time": self.date_created
+        }
+
 
 class Student(models.Model):
     name = models.CharField(max_length=30)
-    project = models.ManyToManyField('Project',null=True, blank=True)
+    project = models.ForeignKey('Project',null=True, blank=True, on_delete=models.CASCADE)
     enroll = models.CharField(max_length=12)
     branch = models.CharField(max_length=12)
     section = models.CharField(max_length=5)
@@ -42,6 +52,7 @@ class Student(models.Model):
             "enroll": self.enroll,
             "branch": self.branch,
             "section": self.section,
+            "project": self.project.serialize(),
             "time": self.date_created
         }
 

@@ -2,6 +2,7 @@
 
 {% block content %}
 <hr>
+<div class="table-responsive-sm">
 <table class="table table-hover">
     <thead class="bg-success text-white">
       <tr>
@@ -10,7 +11,9 @@
         <th scope="col">Project Name</th>
         <th scope="col">Language</th>
         <th scope="col">Section</th>
-        <th></th>
+        <th><button type="button" class="btn btn-sm btn-outline-light" data-toggle="modal" data-target="#exampleModal">
+        <i class="fas fa-user-plus"></i>
+        </button></th>
       </tr>
     </thead>
     <tbody id=table-body>
@@ -26,50 +29,162 @@
       {% endfor %}
     </tbody>
   </table>
- 
-  <div class='row mb-3 mt-3'>
-    <div class='col-md-6 mx-auto col-10  border'>
-        <form class='form' id='stu-create-form' method='POST' action='/create-student'>
-            {% csrf_token %}
-            <div class='d-none alert alert-danger' id='stu-create-form-error'></div>
-            <input type='hidden' value='/' name='next' /> <!-- want it to be redirected to home page-->
-            <input type="text" required="required" class='form-control text' rows='5' name='name' placeholder='Enter Name...'/>
-            <input type="text" required="required" class='form-control text' rows='5' name='enroll' placeholder='Enter Enrollment...'/>
-            <input type="text" required="required" class='form-control text' rows='5' name='branch' placeholder='Enter Branch...'/>
-            <input type="text" required="required" class='form-control text' rows='5' name='section' placeholder='Enter Section...'/>
-           
-            <button type='submit' class="btn btn-info float-right">Submit</button>
-            <div class="msg text-success bg-light"></div>
-        </form>
-    </div> 
 </div>
+
+
+  <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document" >
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Create Student <i class="fas fa-users"></i></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class='form form-group ' id='stu-create-form' method='POST' action='/create-student'>
+      <div class="modal-body">
+        <div class='row mb-3 mt-3'>
+          <div class='col-md-10 mx-auto col-10  border'>
+              
+                  {% csrf_token %}
+                  <div class='d-none alert alert-danger' id='stu-create-form-error'></div>
+                  <input type='hidden' value='/' name='next' /> <!-- want it to be redirected to home page-->
+                  <br>
+                  <div class="form-group row">
+                    <label for="studentName" class="col-sm-2 col-form-label">Name:</label>
+                    <div class="col-sm-10">
+                    <input type="text" required="required" class='form-control text' rows='3' name='name' placeholder='Enter Name...'/>
+                    </div>
+                  </div>
+              
+                  <div class="form-group row">
+                    <label for="studentEnroll" class="col-sm-2 col-form-label">Enrollment::</label>
+                    <div class="col-sm-10">
+                  <input type="text" required="required" class='form-control text' rows='3' name='enroll' placeholder='Enter Enrollment...'/>
+                 </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="studentBranch" class="col-sm-2 col-form-label">Branch:</label>
+                  <div class="col-sm-10">
+                    <select class="custom-select mr-sm-2" name="branch" id="branch">
+                      <option value="EC" selected>EC</option>
+                      <option value="CS">CS</option>
+                      <option value="IT">IT</option>
+                      <option value="EE">EE</option>
+                    </select>
+                  <!-- <input type="text" required="required" class='form-control text' rows='3' name='branch' placeholder='Enter Branch...'/> -->
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="studentSection" class="col-sm-2 col-form-label">Section:</label>
+                    <div class="col-sm-10">
+                      <select class="custom-select mr-sm-2" name="section" id="section">
+                        <option value="A" selected>A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                      </select>
+                  <!-- <input type="text" required="required" class='form-control text' rows='5' name='section' placeholder='Enter Section...'/> -->
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="studentProject" class="col-sm-2 col-form-label">Project:</label>
+                    <div class="col-sm-10">
+                  <input type="text" required="required" class='form-control text' rows='5' name='project' placeholder='Enter Project Name...'/>
+                 </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="projectLang" class="col-sm-2 col-form-label">Language:</label>
+                  <div class="col-sm-10">
+                    <select class="custom-select mr-sm-2" name="language" id="language">
+                      <option value="C" selected>C</option>
+                      <option value="C++">C++</option>
+                      <option value="Python">Python</option>
+                      <option value="Java">Java</option>
+                    </select>
+                  <!-- <input type="text" required="required" class='form-control text' rows='5' name='language' placeholder='Enter Project Language...'/> -->
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="projectCategory" class="col-sm-2 col-form-label">Category:</label>
+                    <div class="col-sm-10">
+                      <select class="custom-select mr-sm-2" name="category" id="category">
+                        <option value="Web Application" selected>Web Application</option>
+                        <option value="Desktop Apllication">Desktop Apllication</option>
+                        <option value="Console Application">Console Application</option>
+                      </select>
+                  <!-- <input type="text" required="required" class='form-control text' rows='5' name='category' placeholder='Enter Project Category...'/> -->
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="projectDescription" class="col-sm-2 col-form-label">Description:</label>
+                    <div class="col-sm-10">
+                  <input type="text" required="required" class='form-control text' rows='5' name='description' placeholder='Enter Project Description...'/>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="projectDoc" class="col-sm-2 col-form-label">Document:</label>
+                    <div class="col-sm-10">
+                  <input type="file" required="required" class='form-control text' rows='5' name='document' placeholder='Browse document...'/>
+                  </div>
+                </div>
+                  <div class="msg text-success bg-light"></div>
+             
+          </div> 
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+ 
+  
 
 
 <script>
   function handleStuCreateFormDidSubmit(event){
     event.preventDefault()
     const myForm = event.target
+    console.log(myForm)
     const myFormData = new FormData(myForm)
+    console.log(myFormData)
     const url = myForm.getAttribute("action")
     const method = myForm.getAttribute("method")
     const xhr = new XMLHttpRequest()
     const responseType ="json"
     xhr.responseType = responseType
-        xhr.open(method,url)
-        xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest") //In order to make django return "true" when queried request.is_ajax()
-        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
-        xhr.onload = function(){
-        //console.log(xhr.response) log the response thats coming back
-        if(xhr.status === 201) {
-            //handleTweetFormError("Success", false)
-            const newStudentJson = xhr.response //response will give tweet element in json
-            //const newTweetJson = JSON.parse(newTweet)
-            //console.log(newTweetJson.likes)
-            const newStudentElement = formatStudentTableEl(newStudentJson)
-            const ogHtml = tableConEl.innerHTML
-            tableConEl.innerHTML = newStudentElement + ogHtml
-            myForm.reset() // to clear the previous tweet after successfully tweeting
-            console.log(newStudentJson)
+    xhr.open(method,url)
+    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest") //In order to make django return "true" when queried request.is_ajax()
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
+    xhr.onload = function(){
+    //console.log(xhr.response) log the response thats coming back
+    if(xhr.status === 201) {
+        //handleTweetFormError("Success", false)
+        console.log(xhr.response)
+        const newStudentJson = xhr.response //response will give tweet element in json
+        //const newTweetJson = JSON.parse(newTweet)
+        //console.log(newTweetJson.likes)
+        const newStudentElement = formatStudentTableEl(newStudentJson)
+        const ogHtml = tableConEl.innerHTML
+        tableConEl.innerHTML = newStudentElement + ogHtml
+        myForm.reset() // to clear the previous tweet after successfully tweeting
+        console.log(newStudentJson)
 
         }
   }
@@ -81,7 +196,7 @@
 
   const formatStudentTableEl = (props) => {
     const student = props
-    const formattedStu = "<tr><th scope='row'>#</th><td>"+ student.name +"</td><td></td><td></td><td> " + student.section +"</td></tr>"
+    const formattedStu = "<tr><th scope='row'>#</th><td>"+ student.name +"</td><td>"+student.project.name+"</td><td>"+student.project.language+"</td><td> " + student.section +"</td></tr>"
     return formattedStu
   }
 
