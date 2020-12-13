@@ -3,18 +3,47 @@
 {% block content %}
 
 <br>
+
+
+<div class="container bg-light">
 <form id="stu_form" action="">
+  <h2 class="bg-success text-white text-center p-3">Search Form <i class="fas fa-search"></i></h2>
     <div class="form-group">
       <label for="exampleInputEmail1">Name</label>
-      <input type="text" class="form-control" name="student_name" id="student_name" aria-describedby="emailHelp" placeholder="Enter Name" value="abc">
+      <input type="text" class="form-control" name="student_name" id="student_name" aria-describedby="emailHelp" placeholder="Enter Name" value="">
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Enrollment</label>
       <input type="text" class="form-control" id="student_enroll" value="">
     </div>
-  
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Project</label>
+      <input type="text" class="form-control" id="student_project" value="">
+    </div>
+    <div class="form-group">
+      <label for="projectLang">Language</label>
+        <select class="custom-select mr-sm-2" name="language" id="language">
+          <option value="C" selected>C</option>
+          <option value="C++">C++</option>
+          <option value="Python">Python</option>
+          <option value="Java">Java</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="projectLang">Category</label>
+        <select class="custom-select mr-sm-2" name="category" id="category">
+          <option value="Web Application" selected>Web Application</option>
+          <option value="Desktop Apllication">Desktop Apllication</option>
+          <option value="Console Application">Console Application</option>
+        </select>
+        </div>
+      <div class=" d-flex flex-row-reverse">
+        <button type="submit" class="btn btn-primary">Find</button>
+      </div>
   </form>
+</div>
+
+
   <script>
     function handleSubmit(event){
       event.preventDefault()
