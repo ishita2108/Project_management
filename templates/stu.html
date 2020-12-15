@@ -75,7 +75,7 @@
 
 
 
-  <!-- Modal -->
+  <!-- Modal Edit Student-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -170,14 +170,14 @@
                   <div class="form-group row">
                       <label for="projectDescription" class="col-sm-2 col-form-label">Description:</label>
                       <div class="col-sm-10">
-                    <input type="text" required="required" class='form-control text' rows='5' name='description' placeholder='Enter Project Description...'/>
+                    <input type="text" class='form-control text' rows='5' name='description' placeholder='Enter Project Description...'/>
                     </div>
                   </div>
   
                   <div class="form-group row">
                       <label for="projectDoc" class="col-sm-2 col-form-label">Document:</label>
                       <div class="col-sm-10">
-                    <input type="file" required="required" class='form-control text' rows='5' name='document' placeholder='Browse document...'/>
+                    <input type="file" class='form-control text' rows='5' name='document' placeholder='Browse document...'/>
                     </div>
                   </div>
                     <div class="msg text-success bg-light"></div>
@@ -196,7 +196,9 @@
     </div>
   </div>
 </div>
- <!-- Modal2 -->
+
+
+ <!-- Modal2 Delete Student-->
  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -227,6 +229,9 @@
 
 
 <script>
+  function didRedirect(){
+    window.location.href='/'
+  }
   function handleStuDelete(e){
     e.preventDefault()
     console.log(stuDelEl.value)
@@ -244,10 +249,11 @@
     xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
     xhr.onload = function(){
     //console.log(xhr.response) log the response thats coming back
-    if(xhr.status === 201) {
+    if(xhr.status === 200) {
         //handleTweetFormError("Success", false)
         console.log(xhr.response)
-        const newStudentJson = xhr.response //response will give tweet element in json
+        // const newStudentJson = xhr.response //response will give tweet element in json
+        didRedirect()
         //const newTweetJson = JSON.parse(newTweet)
         //console.log(newTweetJson.likes)
         

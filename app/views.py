@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.utils.http import is_safe_url
 from django.conf import settings
@@ -53,6 +53,14 @@ def create_student(request, *args, **kwargs ):
     return JsonResponse(student_obj.serialize(), status=201)
 
 def delete_student(request, *args, **kwargs):
-    print(request.POST)
-    return JsonResponse({"msg":"HEY"}, status=201)
+    id = request.POST.get('id')
+    qs = Student.objects.filter(id = id)
+    next_url = request.POST.get('next')
+    if qs.exists():
+        obj = qs.first()
+        obj.delete()
+        return JsonResponse({"msg":"Found"}, status=200)
+    return JsonResponse({"msg":"Not Found"}, status=404)
+
+# def edit_student(request, *args, **kwargs)
     
