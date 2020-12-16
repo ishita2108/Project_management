@@ -9,4 +9,4 @@ class StudentForm(forms.ModelForm):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['name','language','category','description','document']
+        fields = ['name','language','category','description']

@@ -1,42 +1,48 @@
-{% extends 'base.html' %}
 
-{% block content %}
+
+
 
 <br>
-
 
 <div class="container bg-light">
 <form id="stu_form" action="">
   <h2 class="bg-success text-white text-center p-3">Search Form <i class="fas fa-search"></i></h2>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Name</label>
-      <input type="text" class="form-control" name="student_name" id="student_name" aria-describedby="emailHelp" placeholder="Enter Name" value="">
+    <div class="form-group row">
+      <label for="exampleInputEmail1" class="col-sm-2">Name</label>
+      <input type="text" class="form-control col-sm-3 mr-5" name="student_name" id="student_name" aria-describedby="emailHelp" placeholder="Enter Name" value="">
+      <label for="exampleInputPassword1" class="col-sm-2">Enrollment</label>
+      <input type="text" class="form-control col-sm-3" id="student_enroll" placeholder="Enter Enrollment"  value="">
     </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Enrollment</label>
-      <input type="text" class="form-control" id="student_enroll" value="">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Project</label>
-      <input type="text" class="form-control" id="student_project" value="">
-    </div>
-    <div class="form-group">
-      <label for="projectLang">Language</label>
-        <select class="custom-select mr-sm-2" name="language" id="language">
-          <option value="C" selected>C</option>
+    <div class="form-group row">
+      <label for="exampleInputPassword1" class="col-sm-2">Project</label>
+      <input type="text" class="form-control col-sm-3 mr-5" id="student_project" placeholder="Enter Project Name" value="">
+      <label for="projectLang " class="col-sm-2">Language</label>
+        <select class="custom-select col-sm-3" name="language" id="language">
+          <option value=""></option>
+          <option value="C">C</option>
           <option value="C++">C++</option>
           <option value="Python">Python</option>
           <option value="Java">Java</option>
         </select>
       </div>
-      <div class="form-group">
-        <label for="projectLang">Category</label>
-        <select class="custom-select mr-sm-2" name="category" id="category">
-          <option value="Web Application" selected>Web Application</option>
-          <option value="Desktop Apllication">Desktop Apllication</option>
-          <option value="Console Application">Console Application</option>
+      <div class="form-group row">
+        <label for="projectLang" class="col-sm-2">Category</label>
+        <select class="custom-select col-sm-3 mr-5" name="category" id="category">
+          <option value=""></option>
+          <option value="Web-Application">Web-Application</option>
+          <option value="Desktop-Apllication">Desktop-Application</option>
+          <option value="Console-Application">Console-Application</option>
         </select>
-        </div>
+        <label for="studentSection" class="col-sm-2">Section</label>
+          <select class="custom-select col-sm-3" name="section" id="section">
+            <option value=""></option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+          </select>
+      </div>
       <div class=" d-flex flex-row-reverse">
         <button type="submit" class="btn btn-primary">Find</button>
       </div>
@@ -45,17 +51,32 @@
 
 
   <script>
-    function handleSubmit(event){
-      event.preventDefault()
-    }
-    const onSubmit = (e)=>{
-      name = document.getElementById('stu_form').elements[0].value
+    function didRedirect(data){
+    let url = `/?` 
+    url += data
+    window.location.href= url
+  }
+    data = ``
+    const handleSubmit = (e)=>{
       e.preventDefault()
-      console.log(name)
+      console.log(e)
+      if (nameInput.value !== ""){data += `&name=${nameInput.value}`}
+      if (enrollInput.value !== ""){data += `&enroll=${enrollInput.value}`}
+      if (projectInput.value !== ""){data += `&project=${projectInput.value}`}
+      if (languageInput.value !== ""){data += `&language=${languageInput.value}`}
+      if (categoryInput.value !== ""){data += `&category=${categoryInput.value}`}
+      if (sectionInput.value !== ""){data += `&section=${sectionInput.value}`}
+      didRedirect(data)
       }
     const stuForm = document.getElementById('stu_form')
-    stuForm.addEventListener('submit', onSubmit)
+    stuForm.addEventListener('submit', handleSubmit)
+    const nameInput = document.getElementById('student_name')
+    const enrollInput = document.getElementById('student_enroll')
+    const projectInput = document.getElementById('student_project')
+    const languageInput = document.getElementById('language')
+    const categoryInput = document.getElementById('category')
+    const sectionInput = document.getElementById('section')
     
       
   </script>
-  {% endblock %}
+ 

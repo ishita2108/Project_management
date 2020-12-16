@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="containers">
+{% include 'filter.html' %}
+
 <hr>
+<h2 class="bg-info text-white text-center p-3">Results </h2>
 <div class="table-responsive-sm">
 <table class="table table-hover">
     <thead class="bg-success text-white">
@@ -29,6 +33,7 @@
       {% endfor %}
     </tbody>
   </table>
+</div>
 </div>
 
 
@@ -119,9 +124,9 @@
                     <label for="projectCategory" class="col-sm-2 col-form-label">Category:</label>
                     <div class="col-sm-10">
                       <select class="custom-select mr-sm-2" name="category" id="category">
-                        <option value="Web Application" selected>Web Application</option>
-                        <option value="Desktop Apllication">Desktop Apllication</option>
-                        <option value="Console Application">Console Application</option>
+                        <option value="Web-Application" selected>Web-Application</option>
+                        <option value="Desktop-Application">Desktop-Application</option>
+                        <option value="Console-Application">Console-Application</option>
                       </select>
                   <!-- <input type="text" required="required" class='form-control text' rows='5' name='category' placeholder='Enter Project Category...'/> -->
                   </div>
@@ -131,13 +136,6 @@
                     <label for="projectDescription" class="col-sm-2 col-form-label">Description:</label>
                     <div class="col-sm-10">
                   <input type="text" class='form-control text' rows='5' name='description' placeholder='Enter Project Description...'/>
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="projectDoc" class="col-sm-2 col-form-label">Document:</label>
-                    <div class="col-sm-10">
-                  <input type="file" class='form-control text' rows='5' name='document' placeholder='Browse document...'/>
                   </div>
                 </div>
                   <div class="msg text-success bg-light"></div>
@@ -157,55 +155,8 @@
   
 
 
-<script>
-  function handleStuCreateFormDidSubmit(event){
-    event.preventDefault()
-    const myForm = event.target
-    console.log(myForm)
-    const myFormData = new FormData(myForm)
-    console.log(myFormData)
-    const url = myForm.getAttribute("action")
-    const method = myForm.getAttribute("method")
-    const xhr = new XMLHttpRequest()
-    const responseType ="json"
-    xhr.responseType = responseType
-    xhr.open(method,url)
-    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest") //In order to make django return "true" when queried request.is_ajax()
-    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
-    xhr.onload = function(){
-    //console.log(xhr.response) log the response thats coming back
-    if(xhr.status === 201) {
-        //handleTweetFormError("Success", false)
-        console.log(xhr.response)
-        const newStudentJson = xhr.response //response will give tweet element in json
-        //const newTweetJson = JSON.parse(newTweet)
-        //console.log(newTweetJson.likes)
-        const newStudentElement = formatStudentTableEl(newStudentJson)
-        const ogHtml = tableConEl.innerHTML
-        tableConEl.innerHTML = newStudentElement + ogHtml
-        myForm.reset() // to clear the previous tweet after successfully tweeting
-        console.log(newStudentJson)
-
-        }
-  }
-  xhr.onerror = function(){
-    alert('ERROR!');
-  }
-  xhr.send(myFormData)
-  }
-
-  const formatStudentTableEl = (props) => {
-    const student = props
-    const formattedStu = "<tr><th scope='row'>#</th><td>"+ student.name +"</td><td>"+student.project.name+"</td><td>"+student.project.language+"</td><td> " + student.section +"</td></tr>"
-    return formattedStu
-  }
-
-  const stuCreateFormEl = document.getElementById('stu-create-form')
-  const tableConEl = document.getElementById('table-body')
-  stuCreateFormEl.addEventListener("submit",handleStuCreateFormDidSubmit)
-
+<script src="../static/js/home.js">
   
-    
 </script>
 
 
